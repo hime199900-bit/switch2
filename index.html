@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Switch2通知</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <h1>Switch2通知</h1>
+  <p>Switch2のポイント・価格・在庫の変化をリアルタイムで通知します。</p>
+
+  <button id="notifyBtn">通知を有効にする</button>
+
+  <script>
+    // Service Worker 登録
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+
+    // 通知許可
+    document.getElementById("notifyBtn").onclick = async () => {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        alert("通知が有効になりました！");
+      } else {
+        alert("通知が許可されませんでした");
+      }
+    };
+  </script>
+</body>
+</html>
